@@ -1,6 +1,7 @@
 import "./App.css";
 import useInput from "./Components/UseInput";
 import useTabs from "./Components/UseTabs";
+import useTitle from "./Components/UseTitle";
 
 const content = [
   {
@@ -16,6 +17,10 @@ const App = () => {
   const maxLen = (value) => value.length < 20;
   const name = useInput("Mr.", maxLen);
   const { currentItem, changeItem } = useTabs(0, content);
+  const titleUpdater = useTitle("Loading...");
+  setTimeout(() => {
+    titleUpdater("Chang's React Hooks");
+  }, 3000);
   return (
     <div className="App">
       <h1>Hello 창창</h1>

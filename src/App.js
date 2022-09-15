@@ -1,4 +1,5 @@
 import "./App.css";
+import useClick from "./Components/UseClick";
 import useInput from "./Components/UseInput";
 import useTabs from "./Components/UseTabs";
 import useTitle from "./Components/UseTitle";
@@ -21,9 +22,11 @@ const App = () => {
   setTimeout(() => {
     titleUpdater("Chang's React Hooks");
   }, 3000);
+  const sayHello = () => console.log("Hello");
+  const title = useClick(sayHello);
   return (
     <div className="App">
-      <h1>Hello 창창</h1>
+      <h1 ref={title}>Hello 창창</h1>
       <input placeholder="Name" {...name}></input>
       <div>
         {content.map((section, index) => (

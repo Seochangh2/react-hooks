@@ -1,6 +1,8 @@
 import "./App.css";
 import useClick from "./Components/UseClick";
+import useConfirm from "./Components/UseConfirm";
 import useInput from "./Components/UseInput";
+import usePreventLeave from "./Components/UsePreventLeave";
 import useTabs from "./Components/UseTabs";
 import useTitle from "./Components/UseTitle";
 
@@ -21,9 +23,17 @@ const App = () => {
   const titleUpdater = useTitle("Loading...");
   setTimeout(() => {
     titleUpdater("Chang's React Hooks");
-  }, 3000);
+  }, 2000);
   const sayHello = () => console.log("Hello");
   const title = useClick(sayHello);
+  const confirmWarn = () => {
+    console.log("confirm Waring!");
+  };
+  const abort = () => {
+    console.log("abort");
+  };
+  const confirmMethod = useConfirm("Is UseConfirm", confirmWarn, abort);
+  const { enablePrevent, disablePrevent } = usePreventLeave();
   return (
     <div className="App">
       <h1 ref={title}>Hello 창창</h1>
@@ -40,6 +50,13 @@ const App = () => {
         ))}
       </div>
       <div> {currentItem.content}</div>
+      <div>
+        <button onClick={confirmMethod}>UseConfirm Btn</button>
+      </div>
+      <div>
+        <button onClick={enablePrevent}>Protect</button>
+        <button onClick={disablePrevent}>UnProtect</button>
+      </div>
     </div>
   );
 };

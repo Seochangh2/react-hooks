@@ -3,9 +3,11 @@ import useBeforeLeave from "./Components/UseBeforeLeave";
 import useClick from "./Components/UseClick";
 import useConfirm from "./Components/UseConfirm";
 import useFadeIn from "./Components/UseFadeIn";
+import useFullScreen from "./Components/UseFullScreen";
 import useInput from "./Components/UseInput";
 import useNetwork from "./Components/UseNetwork";
 import usePreventLeave from "./Components/UsePreventLeave";
+import useScroll from "./Components/UseScroll";
 import useTabs from "./Components/UseTabs";
 import useTitle from "./Components/UseTitle";
 
@@ -46,6 +48,9 @@ const App = () => {
     console.log(onLine ? "We online" : "We offline");
   };
   const onLine = useNetwork(netWorkChange);
+  const { x, y } = useScroll();
+
+  const { element, triggerFullScreen } = useFullScreen();
   return (
     <div className="App">
       <h1 ref={title}>Hello 창창</h1>
@@ -75,6 +80,21 @@ const App = () => {
       </div>
       <div>
         <h3>{onLine ? "Online" : "Offline"}</h3>
+      </div>
+
+      <div>
+        <h2 style={{ position: "fixed", color: y > 100 ? "red" : "blue" }}>
+          useScroll
+        </h2>
+      </div>
+      <div>
+        <img
+          ref={element}
+          src="https://i.ibb.co/R6RwNxx/grape.jpg"
+          alt="grape"
+          width="250"
+        ></img>
+        <button onClick={triggerFullScreen}>Make FullScreen</button>
       </div>
     </div>
   );

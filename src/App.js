@@ -1,4 +1,5 @@
 import "./App.css";
+import useBeforeLeave from "./Components/UseBeforeLeave";
 import useClick from "./Components/UseClick";
 import useConfirm from "./Components/UseConfirm";
 import useInput from "./Components/UseInput";
@@ -34,6 +35,8 @@ const App = () => {
   };
   const confirmMethod = useConfirm("Is UseConfirm", confirmWarn, abort);
   const { enablePrevent, disablePrevent } = usePreventLeave();
+  const begForLife = () => console.log("Please don't leave");
+  useBeforeLeave(begForLife);
   return (
     <div className="App">
       <h1 ref={title}>Hello 창창</h1>

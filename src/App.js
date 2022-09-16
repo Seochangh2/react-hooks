@@ -1,4 +1,5 @@
 import "./App.css";
+import useAxios from "./Components/UseAxios";
 import useBeforeLeave from "./Components/UseBeforeLeave";
 import useClick from "./Components/UseClick";
 import useConfirm from "./Components/UseConfirm";
@@ -6,6 +7,7 @@ import useFadeIn from "./Components/UseFadeIn";
 import useFullScreen from "./Components/UseFullScreen";
 import useInput from "./Components/UseInput";
 import useNetwork from "./Components/UseNetwork";
+import useNotification from "./Components/UseNotification";
 import usePreventLeave from "./Components/UsePreventLeave";
 import useScroll from "./Components/UseScroll";
 import useTabs from "./Components/UseTabs";
@@ -51,6 +53,10 @@ const App = () => {
   const { x, y } = useScroll();
 
   const { element, triggerFullScreen } = useFullScreen();
+  const { loading, error, data, refetch } = useAxios({
+    url: "https://cors-anywhere.herokuapp.com/https://yts.am/api/v2/list_movies.json",
+  });
+  const triggerNotif = useNotification("Can I Cosmic?", { body: "hello" });
   return (
     <div className="App">
       <h1 ref={title}>Hello 창창</h1>
@@ -95,6 +101,14 @@ const App = () => {
           width="250"
         ></img>
         <button onClick={triggerFullScreen}>Make FullScreen</button>
+      </div>
+      <div>
+        <button onClick={triggerNotif}>Notification</button>
+      </div>
+      <div>
+        <h3>{data && data.status}</h3>
+        <h2>{loading && "Loding"}</h2>
+        <button onClick={refetch}>refetch</button>
       </div>
     </div>
   );

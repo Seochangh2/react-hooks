@@ -2,7 +2,9 @@ import "./App.css";
 import useBeforeLeave from "./Components/UseBeforeLeave";
 import useClick from "./Components/UseClick";
 import useConfirm from "./Components/UseConfirm";
+import useFadeIn from "./Components/UseFadeIn";
 import useInput from "./Components/UseInput";
+import useNetwork from "./Components/UseNetwork";
 import usePreventLeave from "./Components/UsePreventLeave";
 import useTabs from "./Components/UseTabs";
 import useTitle from "./Components/UseTitle";
@@ -37,6 +39,13 @@ const App = () => {
   const { enablePrevent, disablePrevent } = usePreventLeave();
   const begForLife = () => console.log("Please don't leave");
   useBeforeLeave(begForLife);
+
+  const fadeInEl = useFadeIn();
+  const fadeInEl2 = useFadeIn(5, 2);
+  const netWorkChange = (onLine) => {
+    console.log(onLine ? "We online" : "We offline");
+  };
+  const onLine = useNetwork(netWorkChange);
   return (
     <div className="App">
       <h1 ref={title}>Hello 창창</h1>
@@ -59,6 +68,13 @@ const App = () => {
       <div>
         <button onClick={enablePrevent}>Protect</button>
         <button onClick={disablePrevent}>UnProtect</button>
+      </div>
+      <div>
+        <h2 {...fadeInEl}>Fade In ~~</h2>
+        <h2 {...fadeInEl2}>Fade In 5s ~~</h2>
+      </div>
+      <div>
+        <h3>{onLine ? "Online" : "Offline"}</h3>
       </div>
     </div>
   );
